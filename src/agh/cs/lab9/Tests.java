@@ -1,11 +1,8 @@
 package agh.cs.lab9;
 
 
-import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.junit.Test;
-
-import java.io.Reader;
 
 import static junit.framework.TestCase.assertEquals;
 
@@ -37,12 +34,13 @@ public class Tests {
             String json = urlReader.readFromUrl("https://api-v3.mojepanstwo.pl/dane/poslowie.json?conditions[poslowie.kadencja]=7");
             GsonBuilder gsonBuilder = new GsonBuilder();
             gsonBuilder.registerTypeAdapter(Posel.class, new PoselDeserializer());
-            gsonBuilder.registerTypeAdapter(PoselMap.class, new PageDeserializer());
-            PoselMap poselMap = gsonBuilder.create().fromJson(json, PoselMap.class);
-            for (int i = 0; i < poselMap.getPosly().length; i++) {
-                System.out.println(poselMap.getPosly()[i].getImiePierwsze() + " " +
-                        poselMap.getPosly()[i].getNazwisko());
+            gsonBuilder.registerTypeAdapter(Page.class, new PageDeserializer());
+            Page page = gsonBuilder.create().fromJson(json, Page.class);
+            for (int i = 0; i < page.getPosly().length; i++) {
+                System.out.println(page.getPosly()[i].getImiePierwsze() + " " +
+                        page.getPosly()[i].getNazwisko());
             }
+            System.out.println(page.getNextUrl());
         } catch (Exception e){
             System.out.print(e);
         }

@@ -17,7 +17,7 @@ public class Posel {
 
     @Override
     public int hashCode() {
-        return imiePierwsze.hashCode()*31 + imieDrugie.hashCode();
+        return imiePierwsze.hashCode()*7 + imieDrugie.hashCode();
     }
 
     public int getId() {
