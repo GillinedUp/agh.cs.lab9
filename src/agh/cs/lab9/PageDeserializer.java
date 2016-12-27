@@ -21,12 +21,20 @@ public class PageDeserializer implements JsonDeserializer<Page> {
 
         // get links to next and last pages
         JsonObject jLinks = links.getAsJsonObject();
-        String nextUrl = jLinks.get("next").getAsString();
-        String lastUrl = jLinks.get("last").getAsString();
+        String nextUrl;
+        String lastUrl;
+
+        // if it's last page
+        try {
+            nextUrl = jLinks.get("next").getAsString();
+            lastUrl = jLinks.get("last").getAsString();
+        } catch (NullPointerException nullEx) {
+            nextUrl = "";
+            lastUrl = "";
+        }
 
         // make new page object
-        Page page = new Page(kadencja);
-        page.setPosly(posly);
+        Page page = new Page(posly);
         page.setNextUrl(nextUrl);
         page.setLastUrl(lastUrl);
         return page;

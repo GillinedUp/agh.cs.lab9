@@ -46,5 +46,10 @@ public class Tests {
         }
     }
 
+    @Test
+    public void kadencjaTest(){
+        Kadencja kadencja = new Kadencja();
+        kadencja.fillInfo(8);
+    }
 
 }
