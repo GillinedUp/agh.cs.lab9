@@ -24,10 +24,12 @@ public class PoselDeserializer implements JsonDeserializer<Posel> {
         String imiePierwsze = jPosel.get("poslowie.imie_pierwsze").getAsString();
         String imieDrugie = jPosel.get("poslowie.imie_drugie").getAsString();
         String nazwisko = jPosel.get("poslowie.nazwisko").getAsString();
+        int id = jPosel.get("poslowie.id").getAsInt();
         Posel posel = new Posel();
         posel.setImiePierwsze(imiePierwsze);
         posel.setImieDrugie(imieDrugie);
         posel.setNazwisko(nazwisko);
+        posel.setId(id);
         return posel;
     }
 

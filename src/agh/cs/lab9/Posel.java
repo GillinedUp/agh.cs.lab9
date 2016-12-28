@@ -20,6 +20,8 @@ public class Posel {
         return imiePierwsze.hashCode()*7 + imieDrugie.hashCode();
     }
 
+
+
     public int getId() {
         return id;
     }
@@ -36,14 +38,6 @@ public class Posel {
         this.wyjazdy = wyjazdy;
     }
 
-    public Wydatki[] getWydatki() {
-        return wydatki;
-    }
-
-    public void setWydatki(Wydatki[] wydatki) {
-        this.wydatki = wydatki;
-    }
-
     public int[] getKadencja() {
         return kadencja;
     }
@@ -52,7 +46,14 @@ public class Posel {
         this.kadencja = kadencja;
     }
 
-    // getters
+    public Wydatki[] getWydatki() {
+        return wydatki;
+    }
+
+    public void setWydatki(Wydatki[] wydatki) {
+        this.wydatki = wydatki;
+    }
+
     public String getImiePierwsze(){
         return this.imiePierwsze;
     }
@@ -64,7 +65,7 @@ public class Posel {
     public String getNazwisko(){
         return this.nazwisko;
     }
-    // setters
+
     public void setImiePierwsze(String imiePierwsze) {
         this.imiePierwsze = imiePierwsze;
     }

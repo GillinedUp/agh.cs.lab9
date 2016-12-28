@@ -49,7 +49,32 @@ public class Tests {
     @Test
     public void kadencjaTest(){
         Kadencja kadencja = new Kadencja();
-        kadencja.fillInfo(8);
+        kadencja.fillInfo(7);
+        for (Posel key : kadencja.getPoselMap().keySet()) {
+            assertEquals(key, kadencja.getPoselMap().get(key));
+        }
     }
 
+
+    @Test
+    public void AddPoselDeserializerTest(){
+        try {
+            UrlReader urlReader = new UrlReader();
+            String json = urlReader.readFromUrl("https://api-v3.mojepanstwo.pl/dane/poslowie/22.json?layers[]=wyjazdy&layers[]=wydatki");
+            GsonBuilder gsonBuilder = new GsonBuilder();
+            gsonBuilder.registerTypeAdapter(Posel.class, new AddPoselDeserializer());
+            //gsonBuilder.registerTypeAdapter(Wydatki.class, new WydatkiDeserializer());
+            Posel posel = gsonBuilder.create().fromJson(json, Posel.class);
+            Wydatki[] wydatki = posel.getWydatki();
+            for (int i = 0; i < wydatki.length; i++) {
+                for (int j = 0; j < wydatki[i].pola.length; j++) {
+                    System.out.println(wydatki[i].pola[j]);
+                }
+                System.out.println("dokument_id: " + wydatki[i].dokument_id);
+                System.out.println("rok: " + wydatki[i].rok);
+            }
+        } catch (Exception e){
+            System.out.print(e);
+        }
+    }
 }

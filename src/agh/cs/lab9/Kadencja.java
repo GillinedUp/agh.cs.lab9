@@ -69,6 +69,9 @@ public class Kadencja {
         }
     }
 
+    public void fillAdd(){
+
+    }
 
 
     public Map<Posel, Posel> getPoselMap() {
