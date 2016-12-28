@@ -13,14 +13,20 @@ public class Posel {
     private int[] kadencja;
     private Wyjazdy[] wyjazdy;
     private Wydatki[] wydatki;
-
+    private String noInfo;
 
     @Override
     public int hashCode() {
         return imiePierwsze.hashCode()*7 + imieDrugie.hashCode();
     }
 
+    public String getNoInfo() {
+        return noInfo;
+    }
 
+    public void setNoInfo(String noInfo) {
+        this.noInfo = noInfo;
+    }
 
     public int getId() {
         return id;

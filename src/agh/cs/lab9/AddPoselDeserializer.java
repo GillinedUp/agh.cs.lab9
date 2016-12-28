@@ -19,10 +19,14 @@ public class AddPoselDeserializer implements JsonDeserializer<Posel> {
         JsonObject jWydatki = wydatki.getAsJsonObject();
         // deserialize it as a regular json element
         Wydatki[] wydatki1 = context.deserialize(jWydatki.get("roczniki"), Wydatki[].class);
-        Wyjazdy[] wyjazdy = context.deserialize(jLayers.get("wyjazdy"), Wyjazdy[].class);
         Posel posel = new Posel();
         posel.setWydatki(wydatki1);
-        posel.setWyjazdy(wyjazdy);
+        try {
+            Wyjazdy[] wyjazdy = context.deserialize(jLayers.get("wyjazdy"), Wyjazdy[].class);
+            posel.setWyjazdy(wyjazdy);
+        } catch (Exception ex) {
+            posel.setNoInfo("Niema informacji o wyjazdach.");
+        }
         return posel;
     }
 

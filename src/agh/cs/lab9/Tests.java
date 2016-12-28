@@ -60,16 +60,20 @@ public class Tests {
     public void AddPoselDeserializerTest(){
         try {
             UrlReader urlReader = new UrlReader();
-            String json = urlReader.readFromUrl("https://api-v3.mojepanstwo.pl/dane/poslowie/22.json?layers[]=wyjazdy&layers[]=wydatki");
+            String json = urlReader.readFromUrl("https://api-v3.mojepanstwo.pl/dane/poslowie/23.json?layers[]=wyjazdy&layers[]=wydatki");
             GsonBuilder gsonBuilder = new GsonBuilder();
             gsonBuilder.registerTypeAdapter(Posel.class, new AddPoselDeserializer());
             //gsonBuilder.registerTypeAdapter(Wydatki.class, new WydatkiDeserializer());
             Posel posel = gsonBuilder.create().fromJson(json, Posel.class);
             Wyjazdy[] wyjazdy = posel.getWyjazdy();
-            for (int i = 0; i < wyjazdy.length; i++) {
-                System.out.println("kraj: " + wyjazdy[i].getKraj());
-                System.out.println("liczba dni: " + wyjazdy[i].getLiczba_dni());
-                System.out.println("koszt: " + wyjazdy[i].getKoszt_suma());
+            if (wyjazdy != null) {
+                for (int i = 0; i < wyjazdy.length; i++) {
+                    System.out.println("kraj: " + wyjazdy[i].getKraj());
+                    System.out.println("liczba dni: " + wyjazdy[i].getLiczba_dni());
+                    System.out.println("koszt: " + wyjazdy[i].getKoszt_suma());
+                }
+            } else {
+                System.out.println(posel.getNoInfo());
             }
         } catch (Exception e){
             System.out.print(e);
