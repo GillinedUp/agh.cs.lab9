@@ -4,8 +4,9 @@ package agh.cs.lab9;
 import com.google.gson.GsonBuilder;
 import org.junit.Test;
 
-import static junit.framework.TestCase.assertEquals;
+import java.util.Map;
 
+import static junit.framework.TestCase.assertEquals;
 /**
  * Created by yurii on 12/18/16.
  */
@@ -50,8 +51,9 @@ public class Tests {
     public void kadencjaTest(){
         Kadencja kadencja = new Kadencja();
         kadencja.fillInfo(7);
-        for (Posel key : kadencja.getPoselMap().keySet()) {
-            assertEquals(key, kadencja.getPoselMap().get(key));
+        for (String key : kadencja.getPoselMap().keySet()) {
+            assertEquals(key, (kadencja.getPoselMap().get(key).getImiePierwsze()
+                    + kadencja.getPoselMap().get(key).getNazwisko()));
         }
     }
 
@@ -78,5 +80,31 @@ public class Tests {
         } catch (Exception e){
             System.out.print(e);
         }
+    }
+
+    @Test
+    public void kadencjaTest2(){
+        Kadencja kadencja = new Kadencja();
+        kadencja.fillInfo(7);
+        kadencja.fillAdd();
+        Map<String, Posel> map = kadencja.getPoselMap();
+        Posel posel = new Posel();
+        posel.setImiePierwsze("Magdalena");
+        posel.setNazwisko("Kochan");
+        Posel posel2 = map.get(posel);
+        assertEquals(posel2.getImiePierwsze(), posel.getImiePierwsze());
+        assertEquals(posel2.getNazwisko(), posel.getNazwisko());
+        assertEquals(posel2.getWyjazdy()[0].getKraj(), "Cypr");
+        assertEquals(Integer.toString(posel2.getWydatki()[0].getDokument_id()), "451981");
+    }
+
+    @Test
+    public void kadencjaHashTest(){
+        Kadencja kadencja = new Kadencja();
+        kadencja.fillInfo(7);
+        Map<String, Posel> map = kadencja.getPoselMap();
+        Posel posel = map.get("MagdalenaKochan");
+        assertEquals(posel.getImiePierwsze(), "Magdalena");
+        assertEquals(posel.getNazwisko(), "Kochan");
     }
 }

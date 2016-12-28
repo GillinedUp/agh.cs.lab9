@@ -25,7 +25,7 @@ public class AddPoselDeserializer implements JsonDeserializer<Posel> {
             Wyjazdy[] wyjazdy = context.deserialize(jLayers.get("wyjazdy"), Wyjazdy[].class);
             posel.setWyjazdy(wyjazdy);
         } catch (Exception ex) {
-            posel.setNoInfo("Niema informacji o wyjazdach.");
+            posel.setNoInfo("Nie ma informacji o wyjazdach.");
         }
         return posel;
     }
