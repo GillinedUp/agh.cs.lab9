@@ -65,13 +65,11 @@ public class Tests {
             gsonBuilder.registerTypeAdapter(Posel.class, new AddPoselDeserializer());
             //gsonBuilder.registerTypeAdapter(Wydatki.class, new WydatkiDeserializer());
             Posel posel = gsonBuilder.create().fromJson(json, Posel.class);
-            Wydatki[] wydatki = posel.getWydatki();
-            for (int i = 0; i < wydatki.length; i++) {
-                for (int j = 0; j < wydatki[i].pola.length; j++) {
-                    System.out.println(wydatki[i].pola[j]);
-                }
-                System.out.println("dokument_id: " + wydatki[i].dokument_id);
-                System.out.println("rok: " + wydatki[i].rok);
+            Wyjazdy[] wyjazdy = posel.getWyjazdy();
+            for (int i = 0; i < wyjazdy.length; i++) {
+                System.out.println("kraj: " + wyjazdy[i].getKraj());
+                System.out.println("liczba dni: " + wyjazdy[i].getLiczba_dni());
+                System.out.println("koszt: " + wyjazdy[i].getKoszt_suma());
             }
         } catch (Exception e){
             System.out.print(e);
