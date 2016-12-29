@@ -2,6 +2,8 @@ package agh.cs.lab9;
 
 import com.google.gson.GsonBuilder;
 
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
@@ -75,6 +77,90 @@ public class Kadencja {
         }
     }
 
+    public double averageSpendings(){
+        double sum = 0;
+        int poselCount = 0;
+        for (String key : poselMap.keySet()) {
+            Posel posel = poselMap.get(key);
+            sum += posel.spendingsSum();
+            poselCount++;
+        }
+        return sum/poselCount;
+    }
+
+    public String mostTours(){
+        int maxNumOfTours = 0;
+        String name = "error has occurred";
+        for (String key : poselMap.keySet()) {
+            Posel posel = poselMap.get(key);
+            if(posel.getWyjazdy() != null) {
+                if(posel.getWyjazdy().length > maxNumOfTours) {
+                    maxNumOfTours = posel.getWyjazdy().length;
+                    name = posel.getImiePierwsze() + " " + posel.getNazwisko();
+                }
+            }
+        }
+        return name + ": " + maxNumOfTours + " wyjazdy.";
+    }
+
+    public String mostTimeSpentAbroad(){
+        int maxDays = 0;
+        int currentDays = 0;
+        String name = "error has occurred";
+        for (String key : poselMap.keySet()) {
+            Posel posel = poselMap.get(key);
+            if(posel.getWyjazdy() != null) {
+                for (int i = 0; i < posel.getWyjazdy().length; i++) {
+                    currentDays += posel.getWyjazdy()[i].getLiczba_dni();
+                }
+                if(currentDays > maxDays) {
+                    maxDays = currentDays;
+                    name = posel.getImiePierwsze() + " " + posel.getNazwisko();
+                }
+                currentDays = 0;
+            }
+        }
+        return name + ": " + maxDays + " dni.";
+    }
+
+    public String mostExpensiveTour(){
+        float maxSum = 0;
+        float curSum = 0;
+        String name = "error has occurred";
+        for (String key : poselMap.keySet()) {
+            Posel posel = poselMap.get(key);
+            if(posel.getWyjazdy() != null) {
+                for (int i = 0; i < posel.getWyjazdy().length; i++) {
+                    curSum = posel.getWyjazdy()[i].getKoszt_suma();
+                    if(curSum > maxSum) {
+                        maxSum = curSum;
+                        name = posel.getImiePierwsze() + " " + posel.getNazwisko();
+                    }
+                }
+            }
+        }
+        return name + ": " + maxSum + " złotych.";
+    }
+
+    public List<String> visitedIT(){
+        List<String> poselList = new LinkedList<>();
+        boolean visited = false;
+        for (String key : poselMap.keySet()) {
+            Posel posel = poselMap.get(key);
+            if(posel.getWyjazdy() != null) {
+                for (int i = 0; i < posel.getWyjazdy().length; i++) {
+                    if(posel.getWyjazdy()[i].getKraj().equals("Włochy")){
+                        visited = true;
+                    }
+                }
+                if(visited) {
+                    poselList.add(posel.getImiePierwsze() + " " + posel.getNazwisko());
+                    visited = false;
+                }
+            }
+        }
+        return poselList;
+    }
 
     public Map<String, Posel> getPoselMap() {
         return poselMap;

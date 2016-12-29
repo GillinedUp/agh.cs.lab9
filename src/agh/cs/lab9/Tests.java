@@ -4,6 +4,7 @@ package agh.cs.lab9;
 import com.google.gson.GsonBuilder;
 import org.junit.Test;
 
+import java.util.List;
 import java.util.Map;
 
 import static junit.framework.TestCase.assertEquals;
@@ -101,6 +102,44 @@ public class Tests {
         Posel posel = map.get("MagdalenaKochan");
         assertEquals(posel.getImiePierwsze(), "Magdalena");
         assertEquals(posel.getNazwisko(), "Kochan");
+    }
+
+    @Test
+    public void serviceTest(){
+        Kadencja kadencja = new Kadencja();
+        kadencja.fillInfo(7);
+        kadencja.fillAdd();
+        System.out.println("Średnia wartość sumy wydatków wszystkich posłów: "
+                + kadencja.averageSpendings());
+        System.out.println("Poseł, który wykonał najwięcej podróży zagranicznych: "
+                + kadencja.mostTours());
+        System.out.println("Poseł, który najdłużej przebywał za granicą: "
+                + kadencja.mostTimeSpentAbroad());
+        System.out.println("Poseł, który odbył najdroższą podróż zagraniczną: "
+                + kadencja.mostExpensiveTour());
+        System.out.println("Posły, którzy odwiedzili Włochy: ");
+        List<String> list = kadencja.visitedIT();
+        for (String name: list) {
+            System.out.println(name);
+        }
+    }
+
+    @Test
+    public void kadencjaTadeuszTest(){
+        Kadencja kadencja = new Kadencja();
+        kadencja.fillInfo(7);
+        Map<String, Posel> map = kadencja.getPoselMap();
+        Posel posel = map.get("TadeuszIwiński");
+        System.out.println(posel.getId());
+    }
+
+    @Test
+    public void kadencjaAdamTest(){
+        Kadencja kadencja = new Kadencja();
+        kadencja.fillInfo(7);
+        Map<String, Posel> map = kadencja.getPoselMap();
+        Posel posel = map.get("AdamSzejnfeld");
+        System.out.println(posel.getId());
     }
 
 }

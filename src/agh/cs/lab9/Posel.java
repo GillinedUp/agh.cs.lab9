@@ -14,6 +14,24 @@ public class Posel {
     private Wydatki[] wydatki;
     private String noInfo;
 
+    public float spendingsSum(){
+        float sum = 0;
+        for (int i = 0; i < wydatki.length; i++) {
+            for (int j = 0; j < wydatki[i].pola.length; j++) {
+                sum += wydatki[i].pola[j];
+            }
+        }
+        return sum;
+    }
+
+    public float spendings13(){
+        float sum = 0;
+        for (int i = 0; i < wydatki.length; i++) {
+            sum += wydatki[i].pola[12];
+        }
+        return sum;
+    }
+
     @Override
     public int hashCode() {
         return (imiePierwsze + nazwisko).hashCode();
