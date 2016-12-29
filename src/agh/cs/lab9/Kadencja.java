@@ -2,15 +2,17 @@ package agh.cs.lab9;
 
 import com.google.gson.GsonBuilder;
 
-import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * Created by yurii on 12/18/16.
  */
 public class Kadencja {
 
-    private Map<String, Posel> poselMap = new LinkedHashMap<>();
+    private Map<String, Posel> poselMap = new ConcurrentHashMap<>();
     private String urlKadencja = "https://api-v3.mojepanstwo.pl/dane/poslowie.json";
     private String nextUrl;
     private String lastUrl;
@@ -19,6 +21,7 @@ public class Kadencja {
     public void fillInfo (int kadencja) {
         this.urlKadencja += "?conditions[poslowie.kadencja]=" + kadencja;
         try {
+
             // initialize first page to get next and last url's
             UrlReader urlReader = new UrlReader();
             String json = urlReader.readFromUrl(urlKadencja);
@@ -60,21 +63,15 @@ public class Kadencja {
     }
 
     public void fillAdd(){
-        String url;
-        Posel posel;
-        try {
-            for (String key : poselMap.keySet()) {
-                url = this.poselUrl + poselMap.get(key).getId() + ".json?layers[]=wyjazdy&layers[]=wydatki";
-                UrlReader urlReader = new UrlReader();
-                String json = urlReader.readFromUrl(url);
-                GsonBuilder gsonBuilder = new GsonBuilder();
-                gsonBuilder.registerTypeAdapter(Posel.class, new AddPoselDeserializer());
-                posel = gsonBuilder.create().fromJson(json, Posel.class);
-                poselMap.get(key).setWyjazdy(posel.getWyjazdy());
-                poselMap.get(key).setWydatki(posel.getWydatki());
-            }
-        } catch (Exception e){
-            System.out.print(e);
+        ExecutorService executor = Executors.newFixedThreadPool(30);
+        for (String key : poselMap.keySet()) {
+            Runnable worker = new FillAddRunner(poselMap, key, poselUrl);
+            executor.execute(worker);
+        }
+        executor.shutdown();
+        // Wait until all threads are finish
+        while (!executor.isTerminated()) {
+
         }
     }
 

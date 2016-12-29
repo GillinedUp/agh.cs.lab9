@@ -57,7 +57,6 @@ public class Tests {
         }
     }
 
-
     @Test
     public void AddPoselDeserializerTest(){
         try {
@@ -103,4 +102,5 @@ public class Tests {
         assertEquals(posel.getImiePierwsze(), "Magdalena");
         assertEquals(posel.getNazwisko(), "Kochan");
     }
+
 }
