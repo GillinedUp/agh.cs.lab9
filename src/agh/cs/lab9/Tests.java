@@ -65,7 +65,6 @@ public class Tests {
             String json = urlReader.readFromUrl("https://api-v3.mojepanstwo.pl/dane/poslowie/23.json?layers[]=wyjazdy&layers[]=wydatki");
             GsonBuilder gsonBuilder = new GsonBuilder();
             gsonBuilder.registerTypeAdapter(Posel.class, new AddPoselDeserializer());
-            //gsonBuilder.registerTypeAdapter(Wydatki.class, new WydatkiDeserializer());
             Posel posel = gsonBuilder.create().fromJson(json, Posel.class);
             Wyjazdy[] wyjazdy = posel.getWyjazdy();
             if (wyjazdy != null) {
@@ -88,14 +87,11 @@ public class Tests {
         kadencja.fillInfo(7);
         kadencja.fillAdd();
         Map<String, Posel> map = kadencja.getPoselMap();
-        Posel posel = new Posel();
-        posel.setImiePierwsze("Magdalena");
-        posel.setNazwisko("Kochan");
-        Posel posel2 = map.get(posel);
-        assertEquals(posel2.getImiePierwsze(), posel.getImiePierwsze());
-        assertEquals(posel2.getNazwisko(), posel.getNazwisko());
-        assertEquals(posel2.getWyjazdy()[0].getKraj(), "Cypr");
-        assertEquals(Integer.toString(posel2.getWydatki()[0].getDokument_id()), "451981");
+        Posel posel = map.get("MagdalenaKochan");
+        assertEquals(posel.getImiePierwsze(), posel.getImiePierwsze());
+        assertEquals(posel.getNazwisko(), posel.getNazwisko());
+        assertEquals(posel.getWyjazdy()[0].getKraj(), "Cypr");
+        assertEquals(Integer.toString(posel.getWydatki()[0].getDokument_id()), "451981");
     }
 
     @Test

@@ -16,7 +16,6 @@ public class Kadencja {
     private String lastUrl;
     private String poselUrl = "https://api-v3.mojepanstwo.pl/dane/poslowie/";
 
-
     public void fillInfo (int kadencja) {
         this.urlKadencja += "?conditions[poslowie.kadencja]=" + kadencja;
         try {
@@ -28,6 +27,7 @@ public class Kadencja {
             gsonBuilder.registerTypeAdapter(Page.class, new PageDeserializer());
             Page page = gsonBuilder.create().fromJson(json, Page.class);
             Posel posel;
+
             // put first page into map
             for (int i = 0; i < page.getPosly().length; i++) {
                 posel = page.getPosly()[i];
@@ -35,6 +35,7 @@ public class Kadencja {
             }
             this.lastUrl = page.getLastUrl();
             this.nextUrl = page.getNextUrl();
+
             // put next pages into map
             while (!this.nextUrl.equals(this.lastUrl)) {
                 json = urlReader.readFromUrl(nextUrl);
@@ -45,6 +46,7 @@ public class Kadencja {
                 }
                 this.nextUrl = page.getNextUrl();
             }
+
             // put last page into map
             json = urlReader.readFromUrl(lastUrl);
             page = gsonBuilder.create().fromJson(json, Page.class);

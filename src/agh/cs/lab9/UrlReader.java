@@ -28,9 +28,4 @@ public class UrlReader {
         }
     }
 
-    public Reader readFromUrl2(String urlPath) throws Exception {
-        URL url = new URL(urlPath);
-        Reader reader = new InputStreamReader(url.openStream());
-        return reader;
-    }
 }

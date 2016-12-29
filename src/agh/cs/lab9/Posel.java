@@ -5,7 +5,6 @@ package agh.cs.lab9;
  */
 public class Posel {
 
-
     private int id;
     private String imiePierwsze;
     private String imieDrugie;

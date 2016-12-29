@@ -20,11 +20,13 @@ public class PoselDeserializer implements JsonDeserializer<Posel> {
         // "data" is nested so get it as a json element
         JsonElement data = jElement.getAsJsonObject().get("data");
         JsonObject jPosel = data.getAsJsonObject();
+
         // deserialize it as a regular json element
         String imiePierwsze = jPosel.get("poslowie.imie_pierwsze").getAsString();
         String imieDrugie = jPosel.get("poslowie.imie_drugie").getAsString();
         String nazwisko = jPosel.get("poslowie.nazwisko").getAsString();
         int id = jPosel.get("poslowie.id").getAsInt();
+
         Posel posel = new Posel();
         posel.setImiePierwsze(imiePierwsze);
         posel.setImieDrugie(imieDrugie);

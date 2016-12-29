@@ -17,6 +17,7 @@ public class AddPoselDeserializer implements JsonDeserializer<Posel> {
         JsonObject jLayers = layers.getAsJsonObject();
         JsonElement wydatki = jLayers.getAsJsonObject().get("wydatki");
         JsonObject jWydatki = wydatki.getAsJsonObject();
+
         // deserialize it as a regular json element
         Wydatki[] wydatki1 = context.deserialize(jWydatki.get("roczniki"), Wydatki[].class);
         Posel posel = new Posel();
