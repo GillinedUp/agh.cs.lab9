@@ -1,6 +1,6 @@
 package agh.cs.lab9;
 
-public class Main {
+public class Sejmometr {
 
     public static void main(String[] args) {
         try {
