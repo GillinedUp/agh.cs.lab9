@@ -4,9 +4,6 @@ import com.google.gson.GsonBuilder;
 
 import java.util.Map;
 
-/**
- * Created by yurii on 29.12.16.
- */
 public class FillAddRunner implements Runnable {
 
     private Map<String, Posel> poselMap;

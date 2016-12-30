@@ -2,16 +2,12 @@ package agh.cs.lab9;
 
 import java.lang.reflect.Type;
 
-import com.google.gson.JsonArray;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 
-/**
- * Created by yurii on 12/20/16.
- */
 public class PoselDeserializer implements JsonDeserializer<Posel> {
 
     public Posel deserialize(final JsonElement jElement, final Type typeOfT, final JsonDeserializationContext context)

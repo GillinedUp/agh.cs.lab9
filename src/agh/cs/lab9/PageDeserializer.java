@@ -4,12 +4,7 @@ import com.google.gson.*;
 
 import java.lang.reflect.Type;
 
-/**
- * Created by yurii on 27.12.16.
- */
 public class PageDeserializer implements JsonDeserializer<Page> {
-
-    int kadencja;
 
     public Page deserialize(final JsonElement jElement, final Type typeOfT, final JsonDeserializationContext context)
             throws JsonParseException {

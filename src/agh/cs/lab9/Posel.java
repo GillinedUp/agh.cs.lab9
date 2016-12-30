@@ -1,8 +1,5 @@
 package agh.cs.lab9;
 
-/**
- * Created by yurii on 12/18/16.
- */
 public class Posel {
 
     private int id;
@@ -59,14 +56,6 @@ public class Posel {
 
     public void setWyjazdy(Wyjazdy[] wyjazdy) {
         this.wyjazdy = wyjazdy;
-    }
-
-    public int[] getKadencja() {
-        return kadencja;
-    }
-
-    public void setKadencja(int[] kadencja) {
-        this.kadencja = kadencja;
     }
 
     public Wydatki[] getWydatki() {

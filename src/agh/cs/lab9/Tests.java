@@ -1,6 +1,5 @@
 package agh.cs.lab9;
 
-
 import com.google.gson.GsonBuilder;
 import org.junit.Test;
 
@@ -8,9 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import static junit.framework.TestCase.assertEquals;
-/**
- * Created by yurii on 12/18/16.
- */
+
 public class Tests {
 
     @Test

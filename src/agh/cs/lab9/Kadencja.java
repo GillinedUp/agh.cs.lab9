@@ -166,32 +166,4 @@ public class Kadencja {
         return poselMap;
     }
 
-    public void setPoselMap(Map<String, Posel> poselMap) {
-        this.poselMap = poselMap;
-    }
-
-    public String getUrlKadencja() {
-        return urlKadencja;
-    }
-
-    public void setUrlKadencja(String urlKadencja) {
-        this.urlKadencja = urlKadencja;
-    }
-
-    public String getNextUrl() {
-        return nextUrl;
-    }
-
-    public void setNextUrl(String nextUrl) {
-        this.nextUrl = nextUrl;
-    }
-
-    public String getLastUrl() {
-        return lastUrl;
-    }
-
-    public void setLastUrl(String lastUrl) {
-        this.lastUrl = lastUrl;
-    }
-
 }

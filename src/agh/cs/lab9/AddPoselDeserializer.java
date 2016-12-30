@@ -4,9 +4,6 @@ import com.google.gson.*;
 
 import java.lang.reflect.Type;
 
-/**
- * Created by yurii on 27.12.16.
- */
 public class AddPoselDeserializer implements JsonDeserializer<Posel> {
 
     public Posel deserialize(final JsonElement jElement, final Type typeOfT, final JsonDeserializationContext context)
