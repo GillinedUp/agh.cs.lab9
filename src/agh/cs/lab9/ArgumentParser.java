@@ -11,9 +11,9 @@ public class ArgumentParser {
         this.args = args;
     }
 
-    public void parseArgs() throws IllegalArgumentException {
+    public void parseArgs() {
         if (args.length == 0) {
-            throw new IllegalArgumentException("\nNie podano żadnych argumentów.\n" +
+            System.out.print("\nNie podano żadnych argumentów.\n" +
                     "Dla wyświetlenia informacji o konkretnym pośle, użyj -p,\n" +
                     "potem dla wyświetlenia informacji o sumie jego wydatków -w,\n" +
                     "lub -n dla wyświetlenia informacji o wydatkach na drobne naprawy\n" +
@@ -26,11 +26,11 @@ public class ArgumentParser {
                     "- najdłużej przebywał za granicą: -b;\n" +
                     "- odbył najdroższą podróż zagraniczną: -c.\n" +
                     "Żeby otrzymać listę wszystkich posłów, którzy odwiedzili Włochy\n" +
-                    "użyj polecenia -wlochy. Na końcu podaj numer kadencji.");
+                    "użyj polecenia -wlochy. Na końcu podaj numer kadencji.\n");
         } else if (args.length == 1) {
-            throw new IllegalArgumentException("Za mało argumentów. Podaj co najmniej 2 argumenty.");
+            System.out.println("Za mało argumentów. Podaj co najmniej 2 argumenty.");
         } else if (args.length > 5) {
-            throw new IllegalArgumentException("Za dużo argumentów. Podaj nie więcej niż 5 argumentów.");
+            System.out.println("Za dużo argumentów. Podaj nie więcej niż 5 argumentów.");
         }
         else parseKad();
     }
@@ -44,12 +44,12 @@ public class ArgumentParser {
                 parseFirstArg();
                 break;
             default:
-                throw new IllegalArgumentException("Podano niepoprawny numer kadencji.\n" +
-                        "Dostępne kadencję: 7 lub 8.");
+                System.out.print("Podano niepoprawny numer kadencji.\n" +
+                        "Dostępne kadencję: 7 lub 8.\n");
         }
     }
 
-    public void parseFirstArg() throws IllegalArgumentException {
+    public void parseFirstArg() {
         switch (args[0]) {
             case "-p": parseP();
                 break;
@@ -63,7 +63,7 @@ public class ArgumentParser {
                 break;
             case "-wlochy": parseAv();
                 break;
-            default: throw new IllegalArgumentException("\nNiepoprawny argument.\n" +
+            default: System.out.print("\nNiepoprawny argument.\n" +
                     "Dla wyświetlenia informacji o konkretnym pośle, użyj -p,\n" +
                     "potem dla wyświetlenia informacji o sumie jego wydatków -w,\n" +
                     "lub -n dla wyświetlenia informacji o wydatkach na drobne naprawy\n" +
@@ -76,7 +76,7 @@ public class ArgumentParser {
                     "- najdłużej przebywał za granicą: -b;\n" +
                     "- odbył najdroższą podróż zagraniczną: -c.\n" +
                     "Żeby otrzymać listę wszystkich posłów, którzy odwiedzili Włochy\n" +
-                    "użyj polecenia -wlochy. Na końcu podaj numer kadencji.");
+                    "użyj polecenia -wlochy. Na końcu podaj numer kadencji.\n");
         }
     }
 
@@ -89,17 +89,17 @@ public class ArgumentParser {
                 showP();
                 break;
             default:
-                throw new IllegalArgumentException("Podano niepoprawny argument.\n" +
+                System.out.print("Podano niepoprawny argument.\n" +
                         "Dla wyświetlenia informacji o sumie jego wydatków -w,\n" +
                         "lub -n dla wyświetlenia informacji o wydatkach na drobne naprawy\n" +
                         "i remonty biura poselskiego.\n");
         }
     }
 
-    public void showP() {
+    public void showP() throws IllegalArgumentException {
         kadencja = makeKadencja(args[1]);
         if (kadencja.getPoselMap().get(args[3]+args[4]) == null) {
-            throw new IllegalArgumentException("Nie znaleziono posła o określonym imienu i nazwisku.");
+            System.out.println("Nie znaleziono posła o określonym imienu i nazwisku.");
         }
         kadencja.fillAdd();
         Posel posel = kadencja.getPoselMap().get(args[3]+args[4]);
@@ -115,7 +115,7 @@ public class ArgumentParser {
         }
     }
 
-    private void parseAv() {
+    private void parseAv() throws IllegalArgumentException {
         kadencja = makeKadencja(args[1]);
         kadencja.fillAdd();
         switch (args[0]) {

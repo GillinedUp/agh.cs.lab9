@@ -104,7 +104,7 @@ public class Tests {
     @Test
     public void serviceTest(){
         Kadencja kadencja = new Kadencja();
-        kadencja.fillInfo(7);
+        kadencja.fillInfo(8);
         kadencja.fillAdd();
         System.out.println("Średnia wartość sumy wydatków wszystkich posłów: "
                 + kadencja.averageSpendings());
@@ -117,7 +117,7 @@ public class Tests {
         System.out.println("Posły, którzy odwiedzili Włochy: ");
         List<String> list = kadencja.visitedIT();
         for (String name: list) {
-            System.out.println(name);
+            System.out.print(name + ", ");
         }
     }
 
